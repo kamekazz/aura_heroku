@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 import django_heroku
 from pathlib import Path
 
@@ -26,7 +27,8 @@ SECRET_KEY = 'django-insecure-5yr3r8ae3s$tf!bnqcob+12gb2b9k9ug#7(z*zaa+9w3-=t-=n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aura-code.herokuapp.com/']
 
 
 # Application definition
@@ -74,10 +76,21 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ddo2lfph7oi94d',
+        'USER': 'ptspbcveckblaq',
+        'PASSWORD': '11e6e177a60cdb28b314e557ec0f70fad57f387d6f964662c384646ec5d76266',
+        'HOST': 'ec2-54-161-255-125.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -117,9 +130,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+# STATIC_URL = '/static/'
 
-STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static'
+django_heroku.settings(locals())
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
